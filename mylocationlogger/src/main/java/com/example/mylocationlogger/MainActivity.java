@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
     TextView tv;
     ToggleButton tb;
 
+    double aa[][] = new double[24][4] ;
+    int x = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         //     ① 타이머를 설정하여 GPS_PROVIDER 에서 일정시간 응답이 없는 경우 NETWORK_PROVIDER로 전환
         //     ② 혹은, 둘다 한꺼번헤 호출하여 들어오는 값을 사용하는 방식.
 
-        int aa[][] = new int[24][4] ;
 
 
         tv = (TextView) findViewById(R.id.textView2);
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                                 100, // 통지사이의 최소 시간간격 (miliSecond)
                                 1, // 통지사이의 최소 변경거리 (m)
                                 mLocationListener);
+
+
+
                     }else{
                         tv.setText("위치정보 미수신중");
                         lm.removeUpdates(mLocationListener);  //  미수신할때는 반드시 자원해체를 해주어야 한다.
@@ -86,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
             //Network 위치는 Gps에 비해 정확도가 많이 떨어진다.
             tv.setText("위치정보 : " + provider + "\n위도 : " + longitude + "\n경도 : " + latitude
                     + "\n고도 : " + altitude + "\n정확도 : "  + accuracy);
+
+            aa[x][1] = longitude;
+            aa[x][2]= latitude;
+            aa[x][3] = altitude;
+            aa[x][4] = accuracy;
+            x = x+1;
+
+
         }
         public void onProviderDisabled(String provider) {
             // Disabled시
